@@ -18,12 +18,6 @@ conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=
 pip install -r requirements.txt
 ```
 
-Within the conda environment, dependencies for the vision-language experiments can be installed. 
-```
-cd platonic-rep-unique
-pip install -r requirements.txt
-```
-
 We additionally provide experiment hyperparameters in `hyp` folder. To use them, move `hyp` to `experiments/hyp`.
 
 
