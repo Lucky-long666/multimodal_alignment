@@ -26,7 +26,8 @@ class AlignmentMetrics:
         "cmd",
         "cmd_unnorm",
         "centered_cmd",
-        "centered_cmd_unnorm"
+        "centered_cmd_unnorm",
+        "cosine_similarity"
     ]
 
     @staticmethod
@@ -184,6 +185,15 @@ class AlignmentMetrics:
             [np.corrcoef(U1_c[:, i], U2_c[:, i])[0, 1] for i in range(cca_dim)]
         )
         return svcca_similarity
+
+    @staticmethod
+    def cosine_similarity(feats_A, feats_B, eps=1e-8):
+        """Return the average cosine similarity between two feature sets."""
+        if feats_A.shape != feats_B.shape:
+            raise ValueError("Input feature shapes must match")
+        norm_A = feats_A / (feats_A.norm(dim=-1, keepdim=True) + eps)
+        norm_B = feats_B / (feats_B.norm(dim=-1, keepdim=True) + eps)
+        return (norm_A * norm_B).sum(dim=-1).mean().item()
     
     
     @staticmethod
